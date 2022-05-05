@@ -16,7 +16,7 @@ class MyPromise {
     try {
       cb(this.#onSuccessBind, this.#onFailBind);
     } catch (e) {
-      this.onFail(e);
+      this.#onFail(e);
     }
   }
 
@@ -39,8 +39,8 @@ class MyPromise {
   }
 
   #onSuccess(value) {
-    // making code asynchronous, because Promises are always asynchronous, could be done with setTimeout, but Promises load way quicker than timeouts
     queueMicrotask(() => {
+      // making code asynchronous, because Promises are always asynchronous, could be done with setTimeout, but Promises load way quicker than timeouts
       if (this.#state !== STATE.PENDING) return;
 
       if (value instanceof MyPromise) {
@@ -77,28 +77,28 @@ class MyPromise {
   then(thenCb, catchCb) {
     return new MyPromise((resolve, reject) => {
       this.#thenCbs.push((result) => {
-        if (thenCb === null) {
+        if (thenCb == null) {
           resolve(result);
           return;
         }
 
         try {
           resolve(thenCb(result));
-        } catch (e) {
-          reject(e);
+        } catch (error) {
+          reject(error);
         }
       });
 
       this.#catchCbs.push((result) => {
-        if (catchCb === null) {
+        if (catchCb == null) {
           reject(result);
           return;
         }
 
         try {
           resolve(catchCb(result));
-        } catch (e) {
-          reject(e);
+        } catch (error) {
+          reject(error);
         }
       });
 
@@ -128,6 +128,7 @@ class MyPromise {
       resolve(value);
     });
   }
+
   static reject(value) {
     return new MyPromise((resolve, reject) => {
       reject(value);
@@ -156,7 +157,7 @@ class MyPromise {
   static allSettled(promises) {
     const results = [];
     let completedPromises = 0;
-    return new MyPromise((resolve, reject) => {
+    return new MyPromise((resolve) => {
       for (let i = 0; i < promises.length; i++) {
         const promise = promises[i];
         promise
