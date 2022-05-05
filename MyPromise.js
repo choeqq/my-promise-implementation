@@ -45,7 +45,7 @@ class MyPromise {
       // making code asynchronous, because Promises are always asynchronous, could be done with setTimeout, but Promises load way quicker than timeouts
       if (this.#state !== STATE.PENDING) return;
 
-      if (value instanceof MyPromise) {
+      if (value && typeof value.then === "function") {
         value.then(this.#onSuccessBind, this.#onFailBind);
         return;
       }
