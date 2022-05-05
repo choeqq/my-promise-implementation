@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000m\u0000y\u0000-\u0000p\u0000r\u0000o\u0000m\u0000i\u0000s\u0000e\u0000-\u0000i\u0000m\u0000p\u0000l\u0000e\u0000m\u0000e\u0000n\u0000t\u0000a\u0000t\u0000i\u0000o\u0000n\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --noStackTrace"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "url": "https://github.com/choeqq/my-promise-implementation/issues"
   },
   "homepage": "https://github.com/choeqq/my-promise-implementation#readme",
-  "dependencies": {
+  "devDependencies": {
     "jest": "^28.0.3"
   }
 }
