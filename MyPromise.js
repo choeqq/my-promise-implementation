@@ -106,7 +106,17 @@ class MyPromise {
     return this.then(undefined, cb);
   }
 
-  finally(cb) {}
+  finally(cb) {
+    return this.then(
+      (result) => {
+        cb();
+        return result;
+      },
+      (result) => {
+        cb();
+        throw result;
+      }
+    );
+  }
 }
-
 module.exports = MyPromise;
