@@ -1,3 +1,5 @@
+const UncaughtPromiseError = require("./UncaughtPromiseError");
+
 const STATE = {
   FULFILLED: "fulfilled",
   REJECTED: "rejected",
@@ -200,14 +202,6 @@ class MyPromise {
         });
       }
     });
-  }
-}
-
-class UncaughtPromiseError extends Error {
-  constructor(e) {
-    super(e);
-
-    this.stack = `(in promise) ${e.stack}`;
   }
 }
 
