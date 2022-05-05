@@ -153,7 +153,7 @@ class MyPromise {
     });
   }
 
-  static allSettled(promise) {
+  static allSettled(promises) {
     const results = [];
     let completedPromises = 0;
     return new MyPromise((resolve, reject) => {
@@ -173,6 +173,14 @@ class MyPromise {
             }
           });
       }
+    });
+  }
+
+  static race(promises) {
+    return new MyPromise((resolve, reject) => {
+      promises.forEach((promise) => {
+        promise.then(resolve).catch(reject);
+      });
     });
   }
 }
