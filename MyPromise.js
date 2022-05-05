@@ -122,6 +122,17 @@ class MyPromise {
       }
     );
   }
+
+  static resolve(value) {
+    return new MyPromise((resolve) => {
+      resolve(value);
+    });
+  }
+  static reject(value) {
+    return new MyPromise((resolve, reject) => {
+      reject(value);
+    });
+  }
 }
 
 class UncaughtPromiseError extends Error {
