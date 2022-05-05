@@ -183,6 +183,23 @@ class MyPromise {
       });
     });
   }
+
+  static any(promises) {
+    const errors = [];
+    let rejectedPromises = 0;
+    return new MyPromise((resolve, reject) => {
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+        promise.then(resolve).catch((value) => {
+          rejectedPromises++;
+          errors[i] = value;
+          if (rejectedPromises === promises.length) {
+            reject(new AggregateError(errors, "All promises were rejected"));
+          }
+        });
+      }
+    });
+  }
 }
 
 class UncaughtPromiseError extends Error {
