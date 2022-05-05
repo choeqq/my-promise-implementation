@@ -133,6 +133,25 @@ class MyPromise {
       reject(value);
     });
   }
+
+  static all(promises) {
+    const results = [];
+    let completedPromises = 0;
+    return new MyPromise((resolve, reject) => {
+      for (let i = 0; i < promises.length; i++) {
+        const promise = promises[i];
+        promise
+          .then((value) => {
+            completedPromises++;
+            results[i] = value;
+            if (completedPromises === promises.length) {
+              resolve(results);
+            }
+          })
+          .catch(reject);
+      }
+    });
+  }
 }
 
 class UncaughtPromiseError extends Error {
